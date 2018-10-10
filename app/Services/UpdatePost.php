@@ -38,7 +38,7 @@ class UpdatePost
         $data['content'] = $request->get('content');
         $data['category'] = $request->get('category');
 
-        $result = $this->apiHelper->updateJson('posts',$data,['id'=>$id]);
+        $result = $this->apiHelper->updateJson('posts/'.$id ,$data);
 
         dd($result);
     }

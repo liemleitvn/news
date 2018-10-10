@@ -60,8 +60,7 @@ class PostController extends Controller
             return view('blog.error')->with(['errors'=>$category]);
         }
 
-        $post = $this->apiHelper->getJson('posts',['id'=>$id]);
-
+        $post = $this->apiHelper->getJson('posts/'.$id);
 
         return view ('blog.edit')->with(['category'=>$category, 'id'=>$id, 'post'=>$post[0]]);
     }
@@ -72,7 +71,7 @@ class PostController extends Controller
     }
 
     public function destroy($id) {
-        $result = $this->apiHelper->deleteJson('posts',[$id]);
+        $result = $this->apiHelper->deleteJson('posts/'.$id);
 
         $result = json_decode($result, true);
 

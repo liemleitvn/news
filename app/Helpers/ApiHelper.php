@@ -38,13 +38,10 @@ class ApiHelper
 
         if (!empty($params)) {
 
-//            //create querystring from params as: keyword=1&id=2
-//            $queryString = http_build_query($params);
-//            $url .= "?$queryString";
+            //create querystring from params as: keyword=1&id=2
+            $queryString = http_build_query($params);
+            $url .= "?$queryString";
 
-            foreach ($params as $param) {
-                $url .= "/$param";
-            }
         }
 
         return $url;
@@ -91,18 +88,18 @@ class ApiHelper
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
 
         $result = curl_exec($ch);
 
         curl_close($ch);
 
-        dd($result);
+        return $result;
 
     }
 
-    public function updateJson($path, $data, $params) {
-        $url = $this->_makeUrl($path, $params);
+    public function updateJson($path, $data) {
+        $url = $this->_makeUrl($path);
         $headers = $this->_getHeader();
 
         $ch = curl_init();
@@ -110,17 +107,17 @@ class ApiHelper
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PATCH");
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
 
         $result = curl_exec($ch);
 
         curl_close($ch);
 
-        dd($result);
+        return json_encode($result);
     }
 
-    public function deleteJson($path, $params) {
-        $url = $this->_makeUrl($path, $params);
+    public function deleteJson($path) {
+        $url = $this->_makeUrl($path);
         $headers = $this->_getHeader();
 
         $ch = curl_init();

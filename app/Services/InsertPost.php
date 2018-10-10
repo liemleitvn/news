@@ -45,7 +45,12 @@ class InsertPost
         $data['content'] = $request->get('content');
         $data['category'] = $request->get('category');
 
-
         $result = $this->apiHelper->postJson('posts',$data);
+
+        if ($result !== "") {
+            return view('blog.error')->with(['errors'=>$result]);
+        }
+
+        return view('blog.show');
     }
 }
