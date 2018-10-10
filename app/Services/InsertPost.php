@@ -36,7 +36,8 @@ class InsertPost
         if ($validator->fails()) {
             $errors = $validator->errors()->first();
 
-            return view('blog.error')->with(['errors'=>$errors]);
+
+            return ['errors'=>$errors];
         }
 
         $data = array();
@@ -48,9 +49,9 @@ class InsertPost
         $result = $this->apiHelper->postJson('posts',$data);
 
         if ($result !== "") {
-            return view('blog.error')->with(['errors'=>$result]);
+            return ['errors'=>$result];
         }
 
-        return view('blog.show');
+        return ['success'=>'insert successful'];
     }
 }

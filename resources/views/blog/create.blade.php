@@ -14,10 +14,6 @@
                 <td>
                     <select name="category" id="category">
 
-
-                        //to do after has category api
-
-
                         <option value="">---Select Category---</option>
                         @foreach($category as $cate)
                                 <option value="{{ $cate['id']}}">{{ $cate['name'] }}</option>
@@ -38,6 +34,7 @@
             </tr>
         </table>
     </form>
+
     @if ($errors->any())
         <div class="alert alert-danger">
             <ul>

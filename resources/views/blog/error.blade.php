@@ -3,10 +3,11 @@
 
 @section('content')
     @if(isset($errors))
-        @foreach($errors as $error)
-            <div class="alert alert-danger">
+        <div class="alert alert-danger">
+            @foreach($errors as $error)
                 <p>{{ $error }}</p>
-            </div>
-        @endforeach
+            @endforeach
+        </div>
+        <button><a style="text-decoration: none" href="{{ route('blog.login') }}">Back</a></button>
     @endif
 @endsection

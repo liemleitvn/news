@@ -48,7 +48,16 @@ class PostController extends Controller
 
 
     public function store(Request $request) {
+        $request->flashOnly('title','content');
         $result = $this->inserPost->execute($request);
+
+        if(!empty($result['errors'])) {
+
+            $errors = $result;
+
+            return redirect()->route('blog.posts.create')->withErrors($errors);
+        }
+        return redirect()->route('blog.posts.index')->with(['success'=>'Insert successful']);
     }
 
 
@@ -57,7 +66,7 @@ class PostController extends Controller
 
         if(empty($category[0]['id']) || empty($category[0]['name'])) {
 
-            return view('blog.error')->with(['errors'=>$category]);
+            return view('blog.posts.edit')->withErrors($category);
         }
 
         $post = $this->apiHelper->getJson('posts/'.$id);
@@ -67,7 +76,17 @@ class PostController extends Controller
 
 
     public function update(Request $request, $id) {
+        $request->flashOnly('title','content');
         $result = $this->updatePost->execute($request,$id);
+
+
+
+        if(!empty($result['errors'])) {
+            $errors = $result;
+
+            return redirect()->route('blog.posts.edit',['id'=>$id])->withErrors($errors);
+        }
+        return redirect()->route('blog.posts.index')->with(['success'=>'Update successful']);
     }
 
     public function destroy($id) {
@@ -79,7 +98,7 @@ class PostController extends Controller
             return view ('blog.error')->with(['errors'=>$result]);
         }
 
-        return response()->redirectToRoute('blog.posts.index');
+        return response()->redirectToRoute('blog.posts.index')->with(['success'=>'Delete successful']);
 
     }
 

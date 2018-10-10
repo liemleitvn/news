@@ -29,7 +29,9 @@ class UpdatePost
         ]);
 
         if($validator->fails()) {
-            return view('blog.error')->with(['error'=>$validator->errors()->first()]);
+            $errors = $validator->errors()->first();
+
+            return ['errors'=>$errors];
         }
 
         $data = array();
@@ -40,6 +42,6 @@ class UpdatePost
 
         $result = $this->apiHelper->updateJson('posts/'.$id ,$data);
 
-        dd($result);
+        return $result;
     }
 }
