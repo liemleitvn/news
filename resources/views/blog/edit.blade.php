@@ -3,16 +3,16 @@
 @section('content')
     <form method="post" action="{{ route('blog.posts.update', ['id'=>$id]) }}">
         {{ csrf_field() }}
-        <table>
+        <table >
             <tr>
                 <td><label for="title">Title</label></td>
-                <td><input type="text" name="title" id="title" value="{{ $post['title']}}"></td>
+                <td ><input style="width: 500px" type="text" name="title" id="title" value="{{ $post['title']}}"></td>
             </tr>
             <tr>
                 <td><label for="category">Category</label></td>
                 <td>
-                    <select name="category" id="category">
-                        <option value="">---Select Category---</option>
+                    <select style="width: 500px" name="category" id="category">
+                        <option value="">Select</option>
                         @foreach($category as $cate)
                             <option value="{{ $cate['id'] }}">{{ $cate['name'] }}</option>
                         @endforeach
@@ -21,7 +21,7 @@
             </tr>
             <tr>
                 <td><label for="content">Content</label> </td>
-                <td><textarea id="content" name="content">{{ $post['description'] }}</textarea></td>
+                <td><textarea style="width: 500px; height: 100px" id="content" name="content">{{ $post['description'] }}</textarea></td>
             </tr>
             <tr>
                 <td></td>

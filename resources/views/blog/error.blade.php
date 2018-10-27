@@ -8,6 +8,6 @@
                 <p>{{ $error }}</p>
             @endforeach
         </div>
-        <button><a style="text-decoration: none" href="{{ route('blog.login') }}">Back</a></button>
+        <button><a style="text-decoration: none" href="{{ route('blog.login.index') }}">Back</a></button>
     @endif
 @endsection

@@ -79,8 +79,6 @@ class PostController extends Controller
         $request->flashOnly('title','content');
         $result = $this->updatePost->execute($request,$id);
 
-
-
         if(!empty($result['errors'])) {
             $errors = $result;
 
